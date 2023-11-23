@@ -1,0 +1,108 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Agatex Odoo API",
+        "description": "Puntos de acceso REST personalizados para Odoo de Agatex",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://odoo-test.agatex.es/"
+        }
+    ],
+    "paths": {
+        "/api/v1/k/sale/invoice/create": {
+            "post": {
+                "summary": "Crear una factura de venta. Devuelve el nombre asignado a la factura o un listado de errores.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["jsonrpc", "params"],
+                                "properties": {
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0",
+                                        "description": "JSON-RPC Version (2.0)"
+                                    },
+                                    "params": {
+                                        "title": "Parámetros petición",
+                                        "type": "object",
+                                        "required": [
+                                            "api_key",
+                                            "ExternalCustomerId",
+                                            "ExternalCustomerNIF",
+                                            "ExternalCustomerName",
+                                            "FacturaFecha",
+                                            "CompanyId",
+                                            "lineas"
+                                        ],
+                                        "properties": {
+                                            "api_key": {"type": "string"},
+                                            "ExternalCustomerId": {"type": "string"},
+                                            "ExternalCustomerNIF": {"type": "string"},
+                                            "ExternalCustomerName": {"type": "string"},
+                                            "FacturaFecha": {"type": "string"},
+                                            "CompanyId": {"type": "integer"},
+                                            "lineas": {
+                                                "type": "object",
+                                                "required": [
+                                                    "IsSeparator",
+                                                    "ProductId",
+                                                    "ProductDescription",
+                                                    "ProductQuantity",
+                                                    "ProductUnitPrice"
+                                                ],
+                                                "properties": {
+                                                    "IsSeparator": {"type": "boolean"},
+                                                    "ExternalOrderId": {"type": "string"},
+                                                    "ProductId": {"type": "string"},
+                                                    "ProductDescription": {"type": "string"},
+                                                    "ProductUnitOfMeasure": {"type": "string"},
+                                                    "ProductQuantity": {"type": "number"},
+                                                    "ProductUnitPrice": {"type": "number"},
+                                                    "DiscountPercent": {"type": "number"}
+                                                }
+                                            }
+                                        }
+                                      }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Factura creada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {"type": "string"},
+                                        "errors": {"type": "array", "items": {"type": "string"}}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "description": "Error al intentar crear factura",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {"type": "array", "items": {"type": "string"}},
+                                        "errors": {"type": "array", "items": {"type": "string"}}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
