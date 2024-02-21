@@ -103,6 +103,103 @@
                     }
                 }
             }
+        },
+        "/api/v1/k/sale/create": {
+            "post": {
+                "summary": "Crear un pedido de venta. Devuelve el nombre asignado al pedido o un listado de errores.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "required": ["jsonrpc", "params"],
+                                "properties": {
+                                    "jsonrpc": {
+                                        "type": "string",
+                                        "default": "2.0",
+                                        "description": "JSON-RPC Version (2.0)"
+                                    },
+                                    "params": {
+                                        "title": "Parámetros petición",
+                                        "type": "object",
+                                        "required": [
+                                            "api_key",
+                                            "CompanyId",
+                                            "ExternalCustomerNIF",
+                                            "FacturaFecha",
+                                            "lineas"
+                                        ],
+                                        "properties": {
+                                            "api_key": {"type": "string"},
+                                            "CompanyId": {"type": "integer"},
+                                            "ExternalCustomerId": {"type": "string"},
+                                            "ExternalCustomerNIF": {"type": "string"},
+                                            "ExternalCustomerName": {"type": "string"},
+                                            "FacturaFecha": {"type": "string"},
+                                            "Incoterm": {"type": "string"},
+                                            "IncotermUbicacion": {"type": "string"},
+                                            "IncotrastatTransportCode": {"type": "string"},
+                                            "Albaranes": {"type": "string"},
+                                            "lineas": {
+                                                "type": "object",
+                                                "required": [
+                                                    "IsSeparator",
+                                                    "IsTextNote",
+                                                    "ProductId",
+                                                    "ProductDescription"
+                                                ],
+                                                "properties": {
+                                                    "IsSeparator": {"type": "boolean"},
+                                                    "IsTextNote": {"type": "boolean"},
+                                                    "ProductId": {"type": "string"},
+                                                    "ProductDescription": {"type": "string"},
+                                                    "ProductoUoM": {"type": "string"},
+                                                    "ProductoPrecio": {"type": "number"},
+                                                    "Descuento": {"type": "number"},
+                                                    "AlbaranExternoId": {"type": "string"},
+                                                    "AlbaranExternoLinea": {"type": "string"},
+                                                    "PedidoExternoId": {"type": "string"},
+                                                    "PedidoExternoLinea": {"type": "string"}
+                                                }
+                                            }
+                                        }
+                                      }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Pedido creada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {"type": "string"},
+                                        "errors": {"type": "array", "items": {"type": "string"}}
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "4XX": {
+                        "description": "Error al intentar crear pedido",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {"type": "array", "items": {"type": "string"}},
+                                        "errors": {"type": "array", "items": {"type": "string"}}
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
