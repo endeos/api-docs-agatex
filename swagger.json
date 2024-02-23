@@ -146,13 +146,16 @@
                                                     "IsSeparator",
                                                     "IsTextNote",
                                                     "ProductId",
-                                                    "ProductDescription"
+                                                    "ProductDescription",
+                                                    "ProductoCantidad"
                                                 ],
                                                 "properties": {
                                                     "IsSeparator": {"type": "boolean"},
                                                     "IsTextNote": {"type": "boolean"},
                                                     "ProductId": {"type": "string"},
                                                     "ProductDescription": {"type": "string"},
+                                                    "ProductoCantidad": {"type": "number"},
+                                                    "ProductoCantidadEntregada": {"type": "number"},
                                                     "ProductoUoM": {"type": "string"},
                                                     "ProductoPrecio": {"type": "number"},
                                                     "Descuento": {"type": "number"},
