@@ -132,6 +132,7 @@
                                         "properties": {
                                             "api_key": {"type": "string"},
                                             "CompanyId": {"type": "integer"},
+                                            "ExternalId": {"type": "string"},
                                             "ExternalCustomerId": {"type": "string"},
                                             "ExternalCustomerNIF": {"type": "string"},
                                             "ExternalCustomerName": {"type": "string"},
